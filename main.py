@@ -30,6 +30,7 @@ class Main:
         obj_arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
         self.field = Field(arr, obj_arr, self.FIELD_LENGTH, self.FIELD_WIDTH)
         self.turn_counter = 0
+        self.time_of_carrot_growing = 10
         self.create_world()
         self.start()
 
@@ -68,7 +69,7 @@ class Main:
             for hunter in self.hunters:
                 hunter.behavior()
             self.turn_counter += 1
-            if (self.turn_counter % 10) == 0: #каждые сколько-то ходов появляются заново морковки
+            if (self.turn_counter % self.time_of_carrot_growing) == 0: #каждые сколько-то ходов появляются заново морковки
                 for carrot in self.carrots_clone:
                     if self.field.objects_array[carrot.x][carrot.y] == 0:
                         self.field.objects_array[carrot.x][carrot.y] = carrot
