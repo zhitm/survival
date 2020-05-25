@@ -10,7 +10,7 @@ class Hunter(Creature):
         self.food_type = food_type
         self.vision = vision
         self.turn_counter = 0
-        #мб добавить удачу охотника?
+
     def behavior(self):
         self.turn_counter += 1
         rabbit = super().find_nearest('r')
@@ -18,5 +18,4 @@ class Hunter(Creature):
             move = super().go_to(rabbit)
         else:
             move = super().random_move()
-
         super().move(move)

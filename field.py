@@ -10,6 +10,6 @@ class Field:
 
 
     def new_rabbit(self, x, y):
-        self.objects_array[x][y] = Rabbit(x,y, 8, self, 'r', 'c', 5)
+        self.objects_array[x][y] = Rabbit(x,y, 7, self, 'r', 'c', 5)
         self.array[x][y] = 'r'
 

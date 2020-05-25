@@ -12,7 +12,7 @@ class Rabbit(Creature):
         self.type = type
         self.turn_counter = 0
         self.food_type = food_type
-        self.replication_age = 6
+        self.replication_age = 5
 
 
     def behavior(self):
@@ -31,7 +31,7 @@ class Rabbit(Creature):
                 move = super().go_to(carrot_coord)
             elif self.turn_counter >= self.replication_age:
                 rabbit_coord = super().find_nearest('r')
-                if rabbit_coord != None and self.turn_counter >=self.replication_age and self.field.objects_array[rabbit_coord[0]][rabbit_coord[1]].turn_counter >=self.replication_age:
+                if rabbit_coord != None and self.field.objects_array[rabbit_coord[0]][rabbit_coord[1]].turn_counter >=self.replication_age:
                     move = super().go_to(rabbit_coord)
                     if abs(rabbit_coord[0] - self.x) <= 2 and abs(rabbit_coord[1] - self.y) <= 2 :
                         self.child()

@@ -1,8 +1,4 @@
-'''
-Правила игры:
-есть сколько-то охотников, сколько-то зайцев, сколько-то морковок в начале игры. Каждый ход на поле вырастает сколько-то морковки в случайных местах. Если зайчик не ел 5 ходов, то он исчезает.
-Если два зайца оказались на соседних клетках, появляется еще один заец. Охотник ходит на одну и стреляет на одну или две клетки, заец бегает на 1 или 2 на его усмотрению
-'''
+
 from random import randint
 from hunter import Hunter
 from rabbit import Rabbit
@@ -10,11 +6,9 @@ from carrot import Carrot
 from field import Field
 from tkinter import *
 import time
-from creature import Creature
-root = Tk()
 
+root = Tk()
 root.geometry = '1000x1000'
-root.title = 'SURVIVAL'
 c = Canvas(width=1000, height=1000, bg='white')
 c.pack()
 
@@ -22,15 +16,14 @@ c.pack()
 class Main:
 
     def __init__(self):
-        self.FIELD_LENGTH = 150
-        self.FIELD_WIDTH = 150
+        self.FIELD_LENGTH = 80
+        self.FIELD_WIDTH = 80
         self.hunters = []
         self.rabbits = []
         self.carrots = []
         self.carrots_clone = []
-        # self.game_list = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
-        self.num_hunters = 35
-        self.num_rabbits = 1
+        self.num_hunters = 20
+        self.num_rabbits = 50
         self.num_carrots = 50
         self.game_is_over = False
         arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
@@ -52,7 +45,7 @@ class Main:
         for i in range(self.num_rabbits):
             x = randint(2, self.FIELD_LENGTH - 2)
             y = randint(2, self.FIELD_WIDTH - 2)
-            rabbit = Rabbit(x, y, 5, self.field, 'r', 'c', 5)
+            rabbit = Rabbit(x, y, 6, self.field, 'r', 'c', 5)
             self.field.objects_array[x][y] = rabbit
             self.field.array[x][y] = 'r'
             self.rabbits.append(rabbit)
@@ -84,17 +77,12 @@ class Main:
             self.game_state()
             self.update()
 
-    '''
-    Тут надо вызывать функцию поведения для каждого существа, а потом обновить карту
-    '''
-
-    def game_state(self):  # возвращает значение переменной game_is_over
+    def game_state(self):
         if len(self.rabbits) != 0:
             self.game_is_over = False
         else:
             self.game_is_over = True
-            l = Label(c, text = 'ЗАЙЦЫ ВЫМЕРЛИ НА %x ХОДУ' %self.turn_counter, fg = 'red', font=("Helvetica", 25))
-            l.pack()
+
     def update_arrays(self):
         self.hunters = []
         self.rabbits = []
@@ -112,10 +100,12 @@ class Main:
                         self.carrots.append(obj)
                         self.field.array[obj.x][obj.y] = 'c'
 
-
-
     def update(self):  # рисует
         c.delete('all')
+        #for i in range(self.FIELD_LENGTH):   #сетка не очень нужна, при большом поле рябит
+        #    c.create_line(i*1000/self.FIELD_LENGTH, 0,  i*1000/self.FIELD_LENGTH, 1000)
+        #for i in range(self.FIELD_WIDTH):
+        #    c.create_line(0, i*1000/self.FIELD_WIDTH, 1000, i*1000/self.FIELD_WIDTH)
 
         for hunter in self.hunters:
             c.create_oval(hunter.x * 1000 / self.FIELD_LENGTH, hunter.y * 1000 / self.FIELD_WIDTH,
