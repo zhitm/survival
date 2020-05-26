@@ -1,4 +1,4 @@
-
+from Logger import Logger
 from random import randint
 from hunter import Hunter
 from rabbit import Rabbit
@@ -16,15 +16,16 @@ c.pack()
 class Main:
 
     def __init__(self):
-        self.FIELD_LENGTH = 100
-        self.FIELD_WIDTH = 100
+        self.logger = Logger()
+        self.FIELD_LENGTH = 30
+        self.FIELD_WIDTH = 30
         self.hunters = []
         self.rabbits = []
         self.carrots = []
         self.carrots_clone = []
-        self.num_hunters = 60
-        self.num_rabbits = 90
-        self.num_carrots = 100
+        self.num_hunters = 5
+        self.num_rabbits = 10
+        self.num_carrots = 30
         self.game_is_over = False
         arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
         obj_arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
@@ -83,7 +84,11 @@ class Main:
             self.game_is_over = False
         else:
             self.game_is_over = True
-            print('game is over at '+str(self.turn_counter))
+            self.logger.Write('rabbits died out at '+str(self.turn_counter)+' turn')
+            self.logger.Write('rabbits: '+ str(self.num_rabbits))
+            self.logger.Write('hunters: '+ str(self.num_hunters))
+            self.logger.Write('carrots: '+ str(self.num_carrots))
+            self.logger.Write('carrot spawns in '+str(self.time_of_carrot_growing)+' turns')
 
     def update_arrays(self):
         self.hunters = []
