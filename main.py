@@ -17,15 +17,15 @@ class Main:
 
     def __init__(self):
         self.logger = Logger()
-        self.FIELD_LENGTH = 30
-        self.FIELD_WIDTH = 30
+        self.FIELD_LENGTH = 100
+        self.FIELD_WIDTH = 100
         self.hunters = []
         self.rabbits = []
         self.carrots = []
         self.carrots_clone = []
-        self.num_hunters = 5
-        self.num_rabbits = 10
-        self.num_carrots = 30
+        self.num_hunters = 20
+        self.num_rabbits = 50
+        self.num_carrots = 100
         self.game_is_over = False
         arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
         obj_arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
@@ -89,6 +89,7 @@ class Main:
             self.logger.Write('hunters: '+ str(self.num_hunters))
             self.logger.Write('carrots: '+ str(self.num_carrots))
             self.logger.Write('carrot spawns in '+str(self.time_of_carrot_growing)+' turns')
+            self.logger.Write('field: ' +str(self.FIELD_LENGTH)+'x'+str(self.FIELD_WIDTH))
 
     def update_arrays(self):
         self.hunters = []
