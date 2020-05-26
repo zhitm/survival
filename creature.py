@@ -12,14 +12,44 @@ class Creature():
         self.turn_counter = 0
 
     def find_nearest(self, type):
-        nearest = None
-        min_dist = self.vision + 0.1
+
+        '''
+        
         for i in range(self.field.FIELD_LENGTH):
             for j in range(self.field.FIELD_WIDTH):
                 if self.field.array[i][j] == type:
                     dist = ((self.x - i) ** 2 + (self.y - j) ** 2) ** 0.5
                     if dist <= min_dist + 0.1 and dist != 0:
                         nearest = [i, j]
+        '''
+        nearest = None
+        min_dist = self.vision + 0.1
+
+        if self.x - self.vision < 0:
+            left_x = 0
+        else:
+            left_x = self.x - self.vision
+        if self.x + self.vision > self.field.FIELD_LENGTH:
+            right_x = self.field.FIELD_LENGTH-1
+        else:
+            right_x = self.x + self.vision
+        if self.y - self.vision < 0:
+            down_y = 0
+        else:
+            down_y = self.y - self.vision
+        if self.y + self.vision > self.field.FIELD_WIDTH:
+            up_y = self.field.FIELD_WIDTH-1
+        else:
+            up_y = self.y + self.vision
+        for i in range(right_x - left_x):
+            for j in range(up_y - down_y ):
+                if self.field.array[i + left_x][j + down_y] == type:
+                    dist = ((self.x - i - left_x)**2+(self.y - j - down_y)**2  )**0.5
+                    if dist <= min_dist + 0.1 and dist != 0:
+                        min_dist = dist
+                        nearest = [i+left_x, j+down_y]
+
+
         return nearest
 
     def random_move(self):

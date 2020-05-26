@@ -16,15 +16,15 @@ c.pack()
 class Main:
 
     def __init__(self):
-        self.FIELD_LENGTH = 80
-        self.FIELD_WIDTH = 80
+        self.FIELD_LENGTH = 100
+        self.FIELD_WIDTH = 100
         self.hunters = []
         self.rabbits = []
         self.carrots = []
         self.carrots_clone = []
-        self.num_hunters = 20
-        self.num_rabbits = 50
-        self.num_carrots = 50
+        self.num_hunters = 60
+        self.num_rabbits = 90
+        self.num_carrots = 100
         self.game_is_over = False
         arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
         obj_arr = [[0 for i in range(self.FIELD_LENGTH)] for i in range(self.FIELD_WIDTH)]
@@ -73,7 +73,7 @@ class Main:
                 for carrot in self.carrots_clone:
                     if self.field.objects_array[carrot.x][carrot.y] == 0:
                         self.field.objects_array[carrot.x][carrot.y] = carrot
-            time.sleep(0.5)
+            time.sleep(0.1)
             self.update_arrays()
             self.game_state()
             self.update()
@@ -83,6 +83,7 @@ class Main:
             self.game_is_over = False
         else:
             self.game_is_over = True
+            print('game is over at '+str(self.turn_counter))
 
     def update_arrays(self):
         self.hunters = []
